@@ -5,7 +5,7 @@ namespace Business_Model.Interface
 {
     public interface IRunRateRepository
     {
-        Task<Value> GetRecords();
+        Task<List<Value>> GetRecords();
         Task<Value> CreateRecord(CreateRecordDto inputModel);
     }
 }
