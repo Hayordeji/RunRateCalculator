@@ -1,6 +1,6 @@
 ﻿namespace DataAccess.Entity
 {
-    public class Value
+    public class Record
     {
         public int Id { get; set; }
         public int MonthsCompleted { get; set; }

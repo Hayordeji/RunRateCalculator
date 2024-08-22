@@ -10,6 +10,6 @@ namespace DataAccess.Data
             
         }
 
-        public DbSet<Value> Values { get; set; }
+        public DbSet<Record> Records { get; set; }
     }
 }
