@@ -21,5 +21,11 @@ namespace Business_Logic.Services
         {
             return await _runRateRepo.CreateRecord(record);
         }
+
+        public async Task<List<Record>> GetRecordsAsync()
+        {
+            var lists = await _runRateRepo.GetRecords();
+            return lists;
+        }
     }
 }

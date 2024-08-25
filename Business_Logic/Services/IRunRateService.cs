@@ -11,5 +11,7 @@ namespace Business_Logic.Services
     public interface IRunRateService
     {
         Task<Record> CreateRecordAsync(Record record);
+
+        Task<List<Record>> GetRecordsAsync();
     }
 }

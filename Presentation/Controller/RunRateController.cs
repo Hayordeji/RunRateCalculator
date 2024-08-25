@@ -17,7 +17,7 @@ namespace Presentation.Controller
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateRecord([FromBody]CreateRecordDto recordDto)
+        public async Task<IActionResult> Record([FromBody]CreateRecordDto recordDto)
         {
             if (!ModelState.IsValid)
             {
@@ -30,9 +30,16 @@ namespace Presentation.Controller
                 return BadRequest("newRecord is null");
             }
 
-            await _runRateService.CreateRecordAsync(newRecord);
-            return Ok(newRecord);
+            var completedRecord = await _runRateService.CreateRecordAsync(newRecord);
+            return Ok(completedRecord);
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Records()
+        {
+            var list = await _runRateService.GetRecordsAsync();
+            return Ok(list);
         }
     }
 }

@@ -11,9 +11,9 @@ namespace Business_Logic.Mapper
     public static class RunRateMapper
     {
         
-        public static Value ToCreateRecordDto(this CreateRecordDto _createRecordDto)
+        public static Record ToCreateRecordDto(this CreateRecordDto _createRecordDto)
         {
-            return new Value
+            return new Record
             {
                 YearTillDateAchieved = _createRecordDto.YearTillDateAchieved,
                 AnnualBudget = _createRecordDto.AnnualBudget,
