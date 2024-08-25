@@ -15,7 +15,7 @@ namespace Business_Logic.Repository
         {
             _context = context;
         }
-        public async Task<Record> CreateRecord(Record record)
+        public async Task<Record> CreateRecordAsync(Record record)
         {
             var yearTillDateAchieved = Math.Abs(record.YearTillDateAchieved);
             var annualBudget = Math.Abs(record.AnnualBudget);
@@ -48,7 +48,26 @@ namespace Business_Logic.Repository
 
         }
 
-        public async Task<List<Record>> GetRecords()
+        public async Task<Record> DeleteRecordAsync(int id)
+        {
+            var record = await _context.Records.FirstOrDefaultAsync(x => x.Id == id);
+            if (record == null) 
+            {
+                return null;
+            }
+
+            _context.Remove(record);
+            await _context.SaveChangesAsync();
+            return record;
+        }
+
+        public async Task<Record> GetRecordAsync(int id)
+        {
+           var record = await _context.Records.FirstOrDefaultAsync(x => x.Id == id);
+            return record;
+        }
+
+        public async Task<List<Record>> GetRecordsAsync()
         {
             return await _context.Records.ToListAsync();  
         }

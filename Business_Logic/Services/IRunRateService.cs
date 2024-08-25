@@ -13,5 +13,7 @@ namespace Business_Logic.Services
         Task<Record> CreateRecordAsync(Record record);
 
         Task<List<Record>> GetRecordsAsync();
+        Task<Record> DeleteRecordAsync(int id);
+        Task<Record> GetRecordAsync(int id);
     }
 }
