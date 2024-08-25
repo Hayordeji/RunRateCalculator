@@ -64,12 +64,18 @@ namespace Business_Logic.Repository
         public async Task<Record> GetRecordAsync(int id)
         {
            var record = await _context.Records.FirstOrDefaultAsync(x => x.Id == id);
-            return record;
+           return record;
         }
 
         public async Task<List<Record>> GetRecordsAsync()
         {
-            return await _context.Records.ToListAsync();  
+            var list = await _context.Records.ToListAsync();
+            return list;  
+        }
+
+        public async Task<bool> RecordExists(int id)
+        {
+            return await _context.Records.AnyAsync(r => r.Id == id) ? true : false;
         }
     }
 }

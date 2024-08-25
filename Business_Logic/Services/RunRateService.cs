@@ -19,13 +19,30 @@ namespace Business_Logic.Services
         }
         public async Task<Record> CreateRecordAsync(Record record)
         {
-            return await _runRateRepo.CreateRecord(record);
+            return await _runRateRepo.CreateRecordAsync(record);
+        }
+
+        public async Task<Record> DeleteRecordAsync(int id)
+        {
+            if (!await _runRateRepo.RecordExists(id))
+            {
+                return null;
+            }
+            return await _runRateRepo.DeleteRecordAsync(id);
+        }
+
+        public async Task<Record> GetRecordAsync(int id)
+        {
+            if (!await _runRateRepo.RecordExists(id))
+            {
+                return null;
+            }
+            return await _runRateRepo.GetRecordAsync(id);
         }
 
         public async Task<List<Record>> GetRecordsAsync()
         {
-            var lists = await _runRateRepo.GetRecords();
-            return lists;
+            return await _runRateRepo.GetRecordsAsync();
         }
     }
 }

@@ -36,10 +36,33 @@ namespace Presentation.Controller
         }
 
         [HttpGet]
-        public async Task<IActionResult> Records()
+        public async Task<IActionResult> GetRecords()
         {
             var list = await _runRateService.GetRecordsAsync();
             return Ok(list);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetRecord([FromRoute] int id) 
+        {
+            var record = await _runRateService.GetRecordAsync(id);
+            if (record == null)
+            {
+                return NotFound();
+            }
+            return Ok(record);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteRecord([FromRoute] int id)
+        {
+           var recordToDelete =  await _runRateService.DeleteRecordAsync(id);
+            if (recordToDelete == null)
+            {
+                return NotFound();
+            }
+            return Ok("Successfully Deleted");
+        }
+
     }
 }
