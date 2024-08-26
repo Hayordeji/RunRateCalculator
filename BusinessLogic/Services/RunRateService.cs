@@ -1,5 +1,6 @@
 ﻿using Business_Logic.Dto;
 using Business_Logic.Interface;
+using Business_Logic.Mapper;
 using Business_Logic.Repository;
 using DataAccess.Entity;
 using System;
@@ -17,9 +18,14 @@ namespace Business_Logic.Services
         {
             _runRateRepo = runRateRepo;
         }
-        public async Task<Record> CreateRecordAsync(Record record)
+        public async Task<Record> CreateRecordAsync(CreateRecordDto recordDto)
         {
-            return await _runRateRepo.CreateRecordAsync(record);
+            var newRecord = recordDto.ToCreateRecordDto();
+            if (newRecord == null)
+            {
+                return null;
+            }
+            return await _runRateRepo.CreateRecordAsync(newRecord);
         }
 
         public async Task<Record> DeleteRecordAsync(int id)

@@ -10,7 +10,7 @@ namespace Business_Logic.Services
 {
     public interface IRunRateService
     {
-        Task<Record> CreateRecordAsync(Record record);
+        Task<Record> CreateRecordAsync(CreateRecordDto recordDto);
 
         Task<List<Record>> GetRecordsAsync();
         Task<Record> DeleteRecordAsync(int id);

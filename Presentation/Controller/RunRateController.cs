@@ -17,24 +17,29 @@ namespace Presentation.Controller
         }
 
         [HttpPost]
-        public async Task<IActionResult> Record([FromBody]CreateRecordDto recordDto)
+        public async Task<IActionResult> Record([FromBody] CreateRecordDto recordDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Model state is not valid");
-            }
 
-            var newRecord = recordDto.ToCreateRecordDto();
-            if (newRecord == null)
+            try
             {
-                return BadRequest("newRecord is null");
-            }
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Model state is not valid");
+                }
+                var completedRecord = await _runRateService.CreateRecordAsync(recordDto);
 
-            var completedRecord = await _runRateService.CreateRecordAsync(newRecord);
-            return Ok(completedRecord);
+                if (completedRecord == null)
+                {
+                    return BadRequest("record is null");
+                }
+                return Ok(completedRecord);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500,e);
+            }
 
         }
-
         [HttpGet]
         public async Task<IActionResult> GetRecords()
         {
