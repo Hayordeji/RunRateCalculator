@@ -16,7 +16,8 @@ namespace Business_Logic.Repository
             _context = context;
         }
         public async Task<Record> CreateRecordAsync(Record record)
-        {
+        { 
+            //calculations to fill the other properties in the record class
             var yearTillDateAchieved = Math.Abs(record.YearTillDateAchieved);
             var annualBudget = Math.Abs(record.AnnualBudget);
             var monthsCompleted = Math.Abs(record.MonthsCompleted);
