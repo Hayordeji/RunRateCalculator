@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+        SA_PASSWORD: "Superman4ev@"
+        ACCEPT_EULA: "Y"
+    ports:
+        - "1433:1433"
+    volumes:
+        - sqlvolumes:/var/opt/mssql
+    networks:
+        - productnetwork
+    
+  runrateapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+    - "8080:8080"
+    - "8081:8081"
+    depends_on:
+    - sqlserver
+    environment:
+    - ASPNETCORE_ENVIRONMET=Development
+    networks:
+    - productnetwork
+    restart: on-failure
+   
+networks: 
+    productnetwork:
+
+volumes:
+  sqlvolumes:    
+    
+    
+   
